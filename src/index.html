@@ -4,10 +4,31 @@
   <meta charset="utf-8">
   <title>ClientesApp</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
 </head>
-<body>
+
+<script>
+window.onload = function() {
+	// Add active state to sidbar nav links
+  var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
+            if (this.href === path) {
+                $(this).addClass("active");
+            }
+        });
+
+    // Toggle the side navigation
+    $("#sidebarToggle").on("click", function(e) {
+        e.preventDefault();
+        $("body").toggleClass("sb-sidenav-toggled");
+    });
+}
+</script>
+
+<body class="sb-nav-fixed">
   <app-root></app-root>
 </body>
 </html>
