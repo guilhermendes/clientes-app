@@ -11,6 +11,10 @@
         <div class="alert alert-success" role="alert" *ngIf="success == true">
           Cliente salvo/atualizado com sucesso!
         </div>
+
+        <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+          {{ erro }}
+        </div>
       </div>
     </div>
 
