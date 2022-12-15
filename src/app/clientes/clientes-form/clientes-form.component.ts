@@ -9,6 +9,7 @@ import { ClientesService} from '../../clientes.service';
 })
 export class ClientesFormComponent {
   cliente!: Cliente;
+  success:boolean = false;
 
   constructor(private service:ClientesService){
     this.cliente = new Cliente();
@@ -17,7 +18,8 @@ export class ClientesFormComponent {
   onSubmit(){
     this.service.salvar(this.cliente)
     .subscribe( response =>{
-        console.log(response);
+        //console.log(response);
+        this.success = true;
      })
   }
 
