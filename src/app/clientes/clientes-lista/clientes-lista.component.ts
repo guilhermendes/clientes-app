@@ -13,7 +13,11 @@ export class ClientesListaComponent {
 
   constructor(private service: ClientesService){
 
-    this.clientes = this.service.getClientes();
+    this.service
+    .getClientes()
+    .subscribe(
+      resposta => this.clientes = resposta
+    );
   }
 
 
