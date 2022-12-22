@@ -19,6 +19,11 @@ export class ClientesService {
     return this.http.get<Cliente[]>('http://localhost:8080/api/clientes');
   }
 
+  getClientesById(id: number) :Observable<Cliente>{
+    return this.http.get<any>(`http://localhost:8080/api/clientes/${id}`);
+
+  }
+
   /*getClientes() : Cliente[]{
     let cliente = new Cliente();
     cliente.id = 1;
