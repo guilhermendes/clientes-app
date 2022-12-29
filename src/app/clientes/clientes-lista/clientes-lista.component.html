@@ -3,7 +3,22 @@
   <li class="breadcrumb-item active">Consulta</li>
 </ol>
 
-<div class="container">
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+        {{ mensagemSucesso }}
+      </div>
+
+      <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+        {{ mensagemErro }}
+      </div>
+    </div>
+  </div>
+
+
+
   <div class="row">
     <div class="col-md-2">
       <button class="btn btn-warning" (click)="novoCadastro()">
@@ -23,7 +38,7 @@
             <th>Nome</th>
             <th>CPF</th>
             <th>Data Cadasto</th>
-            <th></th>
+            <th>Ações</th>
           </tr>
         </thead>
 
@@ -33,8 +48,13 @@
           <td>{{ cliente.cpf }}</td>
           <td>{{ cliente.dataCadastro }}</td>
           <td>
-            <button class="btn btn-primary btn-sm">
+            <button class="btn btn-primary btn-sm mr-2"
+                    routerLink="/clientes-form/{{ cliente.id }}">
               <i class="fa fa-edit"></i>
+            </button>
+
+            <button class="btn btn-danger btn-sm" (click)="preparaDelecao(cliente)" data-toggle="modal" data-target="#modalDelecao">
+              <i class="fa fa-trash"></i>
             </button>
           </td>
 
@@ -42,4 +62,24 @@
       </table>
     </div>
   </div>
+
+  <div id="modalDelecao" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Confirmação</h4>
+          </div>
+
+          <div class="modal-body" *ngIf="clienteSelecionado">
+            Confirma a deleção do(a) cliente <strong>{{ clienteSelecionado.nome }}</strong>?
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-success mr-2" (click)="deletarCliente()" data-dismiss="modal">Confirmar</button>
+            <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
 </div>
