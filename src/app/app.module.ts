@@ -10,6 +10,7 @@ import{ TemplateModule  } from './template/template.module';
 import { ClientesModule } from './clientes/clientes.module';
 
 import { ClientesService } from './clientes.service'
+import { ServicoPrestadoModule } from './servico-prestado/servico-prestado.module'
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ClientesService } from './clientes.service'
     HttpClientModule,
     AppRoutingModule,
     TemplateModule,
-    ClientesModule
+    ClientesModule,
+    ServicoPrestadoModule
   ],
   providers: [
     ClientesService
