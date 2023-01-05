@@ -3,21 +3,63 @@
   <li class="breadcrum-item active">Novo</li>
 </ol>
 
-<div class="container">
-  <form #form="ngForm" (subimit)="onSubmit()">
-   <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-        <label>Cliente:</label>
+<div class="container-fluid">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <div class="row">
 
-        <select class="form-control">
-          <option value="">Selecione...</option>
-          <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">
-            {{ cliente.nome }}
-          </option>
-        </select>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Cliente:</label>
+
+          <select class="form-control" [ngModelOptions]="{standalone:true }" [(ngModel)]="servico.idCliente">
+            <option value="">Selecione...</option>
+            <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">
+              {{ cliente.nome }}
+            </option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label> Descrição </label>
+            <input type="text" class="form-control"
+            [(ngModel)]="servico.descricao" name="descricao"
+              id="inputDescricao">
+
+        </div>
       </div>
     </div>
-   </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label> Data: </label>
+            <input type="text" class="form-control"
+            [(ngModel)]="servico.data" name="data" id="inputData">
+
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label> Preço: </label>
+            <input type="text" class="form-control"
+            [(ngModel)]="servico.preco" name="preco" id="inputPreco">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-success">
+          <i class="fa fa-save"></i> Salvar</button>
+      </div>
+    </div>
   </form>
 </div>
