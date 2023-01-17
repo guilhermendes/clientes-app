@@ -34,13 +34,4 @@ export class ClientesService {
     return this.http.delete<any>(`http://localhost:8080/api/clientes/${cliente.id}`);
   }
 
-
-  /*getClientes() : Cliente[]{
-    let cliente = new Cliente();
-    cliente.id = 1;
-    cliente.nome = "Gulherme Campos ";
-    cliente.cpf = "00000000";
-    cliente.dataCadastro = "8/08/1985";
-    return [cliente];
-  }*/
 }
