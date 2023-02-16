@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cliente } from './clientes/cliente';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
@@ -8,30 +8,69 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class ClientesService {
-  apiUrl: String = environment.apiUrlBase + '/api/clientes';
+  apiUrl:string = environment.apiUrlBase + '/api/clientes';
 
   constructor(private http:HttpClient) {
 
   }
   salvar(cliente:Cliente) : Observable<Cliente> {
-    return this.http.post<Cliente>(`${this.apiUrl}`, cliente);
+
+    const tokenString = localStorage.getItem('access_token');
+    const token = JSON.parse(tokenString!)
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token.access_token
+    });
+
+    return this.http.post<Cliente>(`${this.apiUrl}`, cliente, { headers });
   }
 
   atualizar(cliente:Cliente) : Observable<any> {
-    return this.http.put<Cliente>(`${this.apiUrl}/${cliente.id}`, cliente);
+    const tokenString = localStorage.getItem('access_token');
+    const token = JSON.parse(tokenString!)
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token.access_token
+    });
+
+    return this.http.put<Cliente>(`${this.apiUrl}/${cliente.id}`, cliente , { headers });
   }
 
-  getClientes(): Observable<Cliente[]>{
-    return this.http.get<Cliente[]>(`${this.apiUrl}`);
+  getClientes() : Observable<Cliente[]>{
+
+    const tokenString = localStorage.getItem('access_token');
+    const token = JSON.parse(tokenString!)
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token.access_token
+    });
+
+    return this.http.get<Cliente[]>(this.apiUrl, { headers });
   }
 
   getClientesById(id: number) :Observable<Cliente>{
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    const tokenString = localStorage.getItem('access_token');
+    const token = JSON.parse(tokenString!)
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token.access_token
+    });
+
+
+    return this.http.get<any>(`${this.apiUrl}/${id}` , { headers });
 
   }
 
   deletar(cliente:Cliente) : Observable<any> {
-    return this.http.delete<any>(`http://localhost:8080/api/clientes/${cliente.id}`);
+    const tokenString = localStorage.getItem('access_token');
+    const token = JSON.parse(tokenString!)
+
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token.access_token
+    });
+
+
+    return this.http.delete<any>(`http://localhost:8080/api/clientes/${cliente.id}`, { headers });
   }
 
 }
